@@ -28,7 +28,7 @@
 
 * Register: Untuk user melakukan pendaftaran akun (register) agar dapat login. Dalam register juga ada fitur spesial yaitu memberikan filter kategori pilihan yang user suka untuk muncul di galeri mereka. Diimplementasikan oleh Alvin Xavier Rakha Wardhana.
 
-* Home: Menampilkan tampilan utama homepage website dengan berbagai fitur yang ada.
+* Home: Menampilkan tampilan utama homepage aplikasi dengan berbagai fitur yang ada.
 
 * Post Karya: Untuk user meng-upload karya-karya mereka yang nantinya dapat diperjualbelikan untuk donasi. Diimplementasikan oleh Alvin Xavier Rakha Wardhana.
 
@@ -38,7 +38,7 @@
 
 * Galeri: Untuk menampilkan explore yang berisi karya-karya yang relate dengan kategori yang sesuai dengan apa yang kita suka dimana informasi kategori tersebut sudah didapat saat melakukan register. Diimplementasikan oleh Idham Vadri.
 
-* Leaderboard: Menampilkan 10 pengguna dengan donasi dan jumlah like terbanyak. Diimplementasikan oleh Stenly Yosua Saputra.
+* Leaderboard: Menampilkan 10 pengguna dengan donasi terbanyak dan menyediakan fitur comment. Diimplementasikan oleh Stenly Yosua Saputra.
 
 * Update: Menampilkan progress atau history dari kegiatan donasi yang sudah terkumpul beserta dengan foto-fotonya. Diimplementasikan oleh Aulia Satrio Wijoyo.
 
