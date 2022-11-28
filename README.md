@@ -24,7 +24,7 @@
 
 ## Daftar fitur yang diimpelemntasikan
 
-* Login: Untuk user melakukan login dalam home jika sudah memiliki akun (sudah register). Diimplementasikan oleh Alvin Xavier Rakha Wardhana
+* Login: Untuk user melakukan login dalam home jika sudah memiliki akun (sudah register). Diimplementasikan oleh Alvin Xavier Rakha Wardhana.
 
 * Register: Untuk user melakukan pendaftaran akun (register) agar dapat login. Dalam register juga ada fitur spesial yaitu memberikan filter kategori pilihan yang user suka untuk muncul di galeri mereka. Diimplementasikan oleh Alvin Xavier Rakha Wardhana.
 
@@ -32,15 +32,15 @@
 
 * Post Karya: Untuk user meng-upload karya-karya mereka yang nantinya dapat diperjualbelikan untuk donasi. Diimplementasikan oleh Alvin Xavier Rakha Wardhana.
 
-* Pembelian karya: Untuk membeli karya-karya yang dipilih dan nantinya akan ada pemberitahuan yang menandakan bahwa karya yang dipilih sudah soldout. Diimplementasikan oleh Rebeka Alma
+* Pembelian karya: Untuk membeli karya-karya yang dipilih dan nantinya akan ada pemberitahuan yang menandakan bahwa karya yang dipilih sudah soldout. Diimplementasikan oleh Rebeka Alma.
 
-* Profile user: Untuk menampilkan biodata akun, jumlah total donasi, karya user, dan sebagainya. Diimplementasikan oleh Zacky Muchlas Dharmawan
+* Profile user: Untuk menampilkan biodata akun, jumlah total donasi, karya user, dan sebagainya. Diimplementasikan oleh Zacky Muchlas Dharmawan.
 
-* Galeri: Untuk menampilkan explore yang berisi karya-karya yang relate dengan kategori yang sesuai dengan apa yang kita suka dimana informasi kategori tersebut sudah didapat saat melakukan register. Diimplementasikan oleh Idham Vadri
+* Galeri: Untuk menampilkan explore yang berisi karya-karya yang relate dengan kategori yang sesuai dengan apa yang kita suka dimana informasi kategori tersebut sudah didapat saat melakukan register. Diimplementasikan oleh Idham Vadri.
 
-* Leaderboard: Menampilkan 10 pengguna dengan donasi dan jumlah like terbanyak. Diimplementasikan oleh Stenly Yosua Saputra
+* Leaderboard: Menampilkan 10 pengguna dengan donasi dan jumlah like terbanyak. Diimplementasikan oleh Stenly Yosua Saputra.
 
-* Update: Menampilkan progress atau history dari kegiatan donasi yang sudah terkumpul beserta dengan foto-fotonya. Diimplementasikan oleh Aulia Satrio Wijoyo
+* Update: Menampilkan progress atau history dari kegiatan donasi yang sudah terkumpul beserta dengan foto-fotonya. Diimplementasikan oleh Aulia Satrio Wijoyo.
 
 ## Alur pengintegrasian dengan web service untuk terhubung dengan aplikasi web yang sudah dibuat saat Proyek Tengah Semester
 
