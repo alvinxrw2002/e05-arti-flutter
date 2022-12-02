@@ -18,18 +18,18 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Roboto',
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                  primary: Colors.black,
+                  backgroundColor: Colors.black,
                   shadowColor: Colors.grey,
                   elevation: 20,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(0.0))))),
           inputDecorationTheme: InputDecorationTheme(
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(0.0))),
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
+              foregroundColor: Colors.black,
               alignment: Alignment.centerLeft,
-              primary: Colors.black,
             ),
           )),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
