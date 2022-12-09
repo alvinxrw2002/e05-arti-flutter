@@ -1,17 +1,17 @@
 // To parse this JSON data, do
 //
-//     final comment = commentFromJson(jsonString);
+//     final userExtended = userExtendedFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Comment> commentFromJson(String str) =>
-    List<Comment>.from(json.decode(str).map((x) => Comment.fromJson(x)));
+List<UserExtended> userExtendedFromJson(String str) => List<UserExtended>.from(
+    json.decode(str).map((x) => UserExtended.fromJson(x)));
 
-String commentToJson(List<Comment> data) =>
+String userExtendedToJson(List<UserExtended> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Comment {
-  Comment({
+class UserExtended {
+  UserExtended({
     required this.model,
     required this.pk,
     required this.fields,
@@ -21,7 +21,7 @@ class Comment {
   int pk;
   Fields fields;
 
-  factory Comment.fromJson(Map<String, dynamic> json) => Comment(
+  factory UserExtended.fromJson(Map<String, dynamic> json) => UserExtended(
         model: json["model"],
         pk: json["pk"],
         fields: Fields.fromJson(json["fields"]),
@@ -38,22 +38,22 @@ class Fields {
   Fields({
     required this.user,
     required this.username,
-    required this.text,
+    required this.pembelian,
   });
 
   int user;
   String username;
-  String text;
+  int pembelian;
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
         user: json["user"],
         username: json["username"],
-        text: json["text"],
+        pembelian: json["pembelian"],
       );
 
   Map<String, dynamic> toJson() => {
         "user": user,
         "username": username,
-        "text": text,
+        "pembelian": pembelian,
       };
 }
