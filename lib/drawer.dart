@@ -48,7 +48,7 @@ class NavigationDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Riwayat'),
             onTap: () {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const RiwayatPage()));
             },
           ),
