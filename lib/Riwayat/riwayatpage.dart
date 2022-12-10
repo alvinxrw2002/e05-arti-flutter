@@ -1,138 +1,114 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:e05_arti_flutter/drawer.dart';
+import 'dart:developer';
 
-class Pesan {
-  String pesans;
-  Pesan(this.pesans);
-}
+import "package:flutter/material.dart";
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
-class Naro {
-  static List<Pesan> contain = <Pesan>[];
-}
-
-class RiwayatPage extends StatefulWidget {
+class RiwayatPage extends StatelessWidget {
   const RiwayatPage({super.key});
 
   @override
-  State<RiwayatPage> createState() => _RiwayatPage();
-}
-
-class _RiwayatPage extends State<RiwayatPage> {
-  final _formKey = GlobalKey<FormState>();
-  String pesan = '';
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Riwayat'),
-      ),
-      drawer: const NavigationDrawer(),
-      body:
-      // ListView.builder(
-      //     itemCount: Naro.contain.length,
-      //     itemBuilder: (context, index) {
-      //       final item = Naro.contain[index];
-      //       return ListTile(
-      //         title:Text(item.pesans),
-      //       );
-      //     },
-      // )
-      Form(
-        key: _formKey,
-        child: Container(
-          padding: const EdgeInsets.all(20.0),
-          margin: const EdgeInsets.all(8),
-          child: Column(
-            children: [
-              Padding(
-                // Menggunakan padding sebesar 8 pixels
-                padding: const EdgeInsets.all(15.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Pesan",
-                    hintText: "Tulis pesan motivasimu disini",
-                    // Menambahkan icon agar lebih intuitif
-                    icon: const Icon(Icons.article_outlined),
-                    // Menambahkan circular border agar lebih rapi
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Riwayat", style: TextStyle(color: Colors.black)),
+          centerTitle: true,
+          elevation: 0,
+          iconTheme: const IconThemeData(color: Colors.black),
+          backgroundColor: const Color(0xffD4D6FF),
+        ),
+        body: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: true,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 48.0),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 48),
+                    const Text(
+                      "Donasi Terkumpul",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  // Menambahkan behavior saat nama diketik
-                  onChanged: (String? value) {
-                    setState(() {
-                      pesan = value!;
-                    });
-                  },
-                  // Menambahkan behavior saat data disimpan
-                  onSaved: (String? value) {
-                    setState(() {
-                      pesan = value!;
-                    });
-                  },
-                  // Validator sebagai validasi form
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Pesan tidak boleh kosong';
-                    }
-                    return null;
-                  },
+                    const SizedBox(height: 12),
+                    Container(
+                      alignment: Alignment.center,
+                      height: 100,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                          color: Color(0xffD4D6FF),
+                          borderRadius: BorderRadius.all(Radius.circular(25))),
+                      child: FutureBuilder(
+                        future: _getDonationData(context),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                                  ConnectionState.done &&
+                              snapshot.hasData) {
+                            return Text('Rp. ${snapshot.data!}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16));
+                          } else {
+                            return const Text("Sedang mendapatkan data...");
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 48),
+                    const Text(
+                      "Pesan Motivasi",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Expanded(
+                      child: GridView.builder(
+                        itemCount: 5,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
+                        ),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 100,
+                            width: 100,
+                            decoration: const BoxDecoration(
+                                color: Color(0xffD4D6FF),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25))),
+                          );
+                        },
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      style: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Color(0xffD4D6FF))),
+                      child: const Text("Tambah Pesan"),
+                    ),
+                  ],
                 ),
               ),
-              const Spacer(),
-              TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.blue),
-                ),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return Dialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          elevation: 15,
-                          child: Container(
-                            child: ListView(
-                              padding:
-                                const EdgeInsets.only(top: 20, bottom: 20),
-                              shrinkWrap: true,
-                              children: <Widget>[
-                                const Center(
-                                  child: Text(
-                                      'Data Berhasil Ditambahkan')),
-                                  const SizedBox(height: 20),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  child: const Text('Kembali'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                    Naro.contain.add(Pesan(pesan));
-                  }
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Text(
-                    "Kirim Pesan",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
+
+  Future<String> _getDonationData(BuildContext context) async {
+    final request = context.watch<CookieRequest>();
+    final response = await request
+        .get("https://arti-pbp-e05.up.railway.app/beli_karya/get-karyas");
+    final convertedResponse = response as List<dynamic>;
+    int totalDonasi = 0;
+    for (var i = 0; i < convertedResponse.length; i++) {
+      totalDonasi = totalDonasi + convertedResponse[i]["harga"] as int;
+    }
+    log(totalDonasi.toString());
+    return totalDonasi.toString();
+  }
 }
+
