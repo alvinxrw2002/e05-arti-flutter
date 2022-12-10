@@ -22,10 +22,6 @@ class _LeaderboardState extends State<LeaderboardPage> {
   final _formKey = GlobalKey<FormState>();
   Future<List<Comment>> fetchComment() async {
     final request = context.watch<CookieRequest>();
-    await request.login("https://arti-pbp-e05.up.railway.app/ajax-login", {
-      'username': 'stenly',
-      'password': 'kembar101002',
-    });
     final response = await request
         .get("https://arti-pbp-e05.up.railway.app/leaderboard/change-comments");
     List<Comment> comments = [];
