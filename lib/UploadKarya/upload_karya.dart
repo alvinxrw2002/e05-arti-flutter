@@ -40,6 +40,24 @@ class _UploadKaryaState extends State<UploadKarya> {
     setState(() {});
   }
 
+  Future<void> upload() async {
+    var stream = ByteStream(image!.openRead());
+    stream.cast();
+
+    var length = await image!.length();
+    var uri =
+        Uri.parse("https://arti-pbp-e05.up.railway.app/post-karya-flutter");
+    var request = MultipartRequest("POST", uri);
+    request.fields['judul'] = judul;
+    request.fields['harga'] = harga.toString();
+    request.fields['kategori'] = kategori!;
+    request.fields['deskripsi'] = deskripsi;
+
+    var multiPartFile = MultipartFile('gambar', stream, length);
+    request.files.add(multiPartFile);
+    request.send();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -298,17 +316,7 @@ class _UploadKaryaState extends State<UploadKarya> {
                                     ),
                                   );
                                 });
-                            var request = MultipartRequest(
-                                'POST',
-                                Uri.parse(
-                                    "https://arti-pbp-e05.up.railway.app/post-karya-flutter"));
-                            request.fields['judul'] = judul;
-                            request.fields['kategori'] = kategori!;
-                            request.fields['harga'] = harga as String;
-                            request.fields['deskripsi'] = deskripsi;
-                            request.files.add(await MultipartFile.fromPath(
-                                'gambar', image.toString()));
-                            request.send();
+                            upload();
                           }
                         }
                       },
