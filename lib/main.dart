@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         return request;
       },
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
             primaryColor: Colors.black,
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
                 alignment: Alignment.centerLeft,
               ),
             )),
-        home: const LoginPage(),
+        home: const MyHomePage(title: "Arti"),
       ),
     );
   }
