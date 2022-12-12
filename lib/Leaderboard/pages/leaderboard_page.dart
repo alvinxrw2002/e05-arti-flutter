@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:e05_arti_flutter/Leaderboard/models/gambar.dart';
 
 class LeaderboardPage extends StatefulWidget {
   const LeaderboardPage({super.key});
@@ -18,10 +19,17 @@ class _LeaderboardState extends State<LeaderboardPage> {
   List<Comment>? comments;
   int indexComment = 0;
   String _isiComment = "";
+  int leaderboardState = 0;
+  int indexGambar = 0;
+  List<Gambar>? listGambar;
 
   final _formKey = GlobalKey<FormState>();
   Future<List<Comment>> fetchComment() async {
     final request = context.watch<CookieRequest>();
+    // await request.login("https://arti-pbp-e05.up.railway.app/ajax-login", {
+    //   "username": "bebek",
+    //   "password": "ramyeon11",
+    // });
     final response = await request
         .get("https://arti-pbp-e05.up.railway.app/leaderboard/change-comments");
     List<Comment> comments = [];
@@ -35,7 +43,6 @@ class _LeaderboardState extends State<LeaderboardPage> {
     final request = context.watch<CookieRequest>();
     final response = await request.get(
         "https://arti-pbp-e05.up.railway.app/leaderboard/leaderboard-pengguna");
-
     List<UserExtended> userExtended = [];
     for (Map<String, dynamic> elem in response) {
       userExtended.add(UserExtended.fromJson(elem));
@@ -43,6 +50,21 @@ class _LeaderboardState extends State<LeaderboardPage> {
     List<UserExtended> res = [];
     for (int i = 0; i < userExtended.length && i < 10; i++) {
       res.add(userExtended[i]);
+    }
+    return res;
+  }
+
+  Future<List<Gambar>> fetchGambar() async {
+    final request = context.watch<CookieRequest>();
+    final response = await request.get(
+        "https://arti-pbp-e05.up.railway.app/leaderboard/leaderboard-karya");
+    List<Gambar> gambar = [];
+    for (Map<String, dynamic> elem in response) {
+      gambar.add(Gambar.fromJson(elem));
+    }
+    List<Gambar> res = [];
+    for (int i = 0; i < gambar.length && i < 5; i++) {
+      res.add(gambar[i]);
     }
     return res;
   }
@@ -75,6 +97,31 @@ class _LeaderboardState extends State<LeaderboardPage> {
                   "Pilih Tipe",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
+                Container(
+                  margin: const EdgeInsets.only(top: 7),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        child: const Text("Pengguna"),
+                        onPressed: () {
+                          setState(() {
+                            leaderboardState = 0;
+                          });
+                        },
+                      ),
+                      TextButton(
+                        child: const Text("Karya"),
+                        onPressed: () {
+                          setState(() {
+                            indexGambar = 0;
+                            leaderboardState = 1;
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                ),
                 SizedBox(
                     width: double.infinity,
                     child: Container(
@@ -86,21 +133,101 @@ class _LeaderboardState extends State<LeaderboardPage> {
                         margin: const EdgeInsets.only(
                             top: 15, bottom: 35, right: 100, left: 100),
                         padding: const EdgeInsets.only(top: 30, bottom: 30),
-                        child: FutureBuilder(
-                          future: fetchUserExtended(),
-                          builder: (context, AsyncSnapshot snapshot) {
-                            if (snapshot.data == null) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            } else {
-                              return Column(
-                                  children: List.generate(
-                                      snapshot.data!.length,
-                                      (index) => Text(snapshot
-                                          .data![index].fields.username)));
-                            }
-                          },
-                        ))),
+                        child: (() {
+                          if (leaderboardState == 0) {
+                            return FutureBuilder(
+                              future: fetchUserExtended(),
+                              builder: (context, AsyncSnapshot snapshot) {
+                                if (snapshot.data == null) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else {
+                                  return Column(
+                                      children: List.generate(
+                                          snapshot.data!.length,
+                                          (index) => Text("${index + 1}. " +
+                                              snapshot.data![index].fields
+                                                  .username)));
+                                }
+                              },
+                            );
+                          }
+                          return FutureBuilder(
+                              future: fetchGambar(),
+                              builder: (context, AsyncSnapshot snapshot) {
+                                if (snapshot.data == null) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else {
+                                  listGambar = snapshot.data;
+                                  return Column(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 8),
+                                        child: Text(
+                                            listGambar![indexGambar].judul,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold)),
+                                      ),
+                                      SizedBox(
+                                        width: 300,
+                                        child: Image.network(
+                                          "https://arti-pbp-e05.up.railway.app/media/" +
+                                              listGambar![indexGambar].path,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Container(
+                                              margin: const EdgeInsets.only(
+                                                  bottom: 5),
+                                              child: const Center(
+                                                child: Text("Image Not Found"),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                      Text(
+                                          "Harga: Rp${listGambar![indexGambar].harga}"),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                            icon: const Icon(
+                                                Icons.arrow_back_ios),
+                                            onPressed: () {
+                                              setState(() {
+                                                if (indexGambar == 0) {
+                                                  indexGambar =
+                                                      listGambar!.length - 1;
+                                                } else {
+                                                  indexGambar--;
+                                                }
+                                              });
+                                            },
+                                          ),
+                                          IconButton(
+                                            icon: const Icon(
+                                                Icons.arrow_forward_ios),
+                                            onPressed: () {
+                                              setState(() {
+                                                if (indexGambar ==
+                                                    listGambar!.length - 1) {
+                                                  indexGambar = 0;
+                                                } else {
+                                                  indexGambar++;
+                                                }
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                }
+                              });
+                        }()))),
               ],
             ),
           ),
@@ -113,7 +240,7 @@ class _LeaderboardState extends State<LeaderboardPage> {
                   Container(
                       margin: const EdgeInsets.all(10),
                       child: const Text(
-                        "Lihat Komentarmu di Sini",
+                        "Pilih Tipe",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       )),
@@ -245,9 +372,32 @@ class _LeaderboardState extends State<LeaderboardPage> {
                   margin: const EdgeInsets.only(bottom: 21),
                   child: TextButton(
                     child: const Text("Submit"),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.reset();
+                        if (request.loggedIn) {
+                          await request.post(
+                              "https://arti-pbp-e05.up.railway.app/leaderboard/create-comment",
+                              {
+                                "text": _isiComment,
+                              });
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: const SizedBox(
+                                      height: 200,
+                                      width: 300,
+                                      child: Center(
+                                          child: Text(
+                                              "Silahkan login terlebih dahulu")),
+                                    ));
+                              });
+                        }
                       }
                     },
                   ),
