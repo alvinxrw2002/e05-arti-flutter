@@ -1,3 +1,4 @@
+import 'package:e05_arti_flutter/BeliKarya/BeliKarya.dart';
 import 'package:flutter/material.dart';
 import 'package:e05_arti_flutter/main.dart';
 import 'package:e05_arti_flutter/UserProfile/pages/profile_page.dart';
@@ -41,10 +42,10 @@ class NavigationDrawer extends StatelessWidget {
               title: const Text('Leaderboard'),
               onTap: () {
                 Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LeaderboardPage()));
-            }
-          ),
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LeaderboardPage()));
+              }),
           ListTile(
             title: const Text('Riwayat'),
             onTap: () {
@@ -52,6 +53,15 @@ class NavigationDrawer extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const RiwayatPage()));
             },
           ),
+          ListTile(
+            title: const Text('Beli Karya'),
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BeliKaryaPage()));
+            },
+          )
         ],
       ),
     );
