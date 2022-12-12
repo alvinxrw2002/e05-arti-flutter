@@ -21,8 +21,8 @@ class _BeliKaryaPageState extends State<BeliKaryaPage> {
 
   Future<List<BeliKarya>> fetchData() async {
     http.Client client = http.Client();
-    final response = await client
-        .get(Uri.parse("http://127.0.0.1:8000/beli_karya/get-karyas-json"));
+    final response = await client.get(Uri.parse(
+        "https://arti-pbp-e05.up.railway.app/beli_karya/get-karyas-json"));
     if (response.statusCode == 200) {
       return compute(parseBeliKarya, response.body);
     } else {

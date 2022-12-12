@@ -1,10 +1,13 @@
 import 'dart:js';
+import 'package:e05_arti_flutter/login_page.dart' as login;
 
 import 'package:e05_arti_flutter/BeliKarya/BeliKarya.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'BeliKaryaModel.dart';
+
+String username = login.username_loggedin;
 
 Widget cardTemplate(BeliKarya beliKarya, context) {
   return Card(
@@ -75,15 +78,15 @@ Widget keteranganDiBeli(bool sudahDiBeli) {
 }
 
 Widget beliButton(BuildContext context, bool sudahDiBeli, int id) {
-  if (!sudahDiBeli) {
+  if (!sudahDiBeli && username.isNotEmpty) {
     return ElevatedButton(
         onPressed: () async {
           String destination =
-              "http://127.0.0.1:8000/beli_karya/post-beli-karya-json";
+              "https://arti-pbp-e05.up.railway.app/beli_karya/post-beli-karya-json";
           var url = Uri.parse(destination);
           final response = await http.post(url,
               headers: {'Content-Type': 'application/json'},
-              body: json.encode({'id': id}));
+              body: json.encode({'id': id, 'username': username}));
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const BeliKaryaPage()));
         },

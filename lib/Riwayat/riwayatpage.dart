@@ -12,11 +12,10 @@ class RiwayatPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Riwayat", style: TextStyle(color: Colors.black)),
-          centerTitle: true,
+          title: const Text("Riwayat", style: TextStyle(color: Colors.white)),
           elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.black),
-          backgroundColor: const Color(0xffD4D6FF),
+          iconTheme: const IconThemeData(color: Colors.white),
+          backgroundColor: Colors.blue,
         ),
         body: CustomScrollView(
           slivers: [
@@ -29,7 +28,7 @@ class RiwayatPage extends StatelessWidget {
                     const SizedBox(height: 48),
                     const Text(
                       "Donasi Terkumpul",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
                     const SizedBox(height: 12),
                     Container(
@@ -47,7 +46,7 @@ class RiwayatPage extends StatelessWidget {
                               snapshot.hasData) {
                             return Text('Rp. ${snapshot.data!}',
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16));
+                                    fontWeight: FontWeight.bold, fontSize: 35));
                           } else {
                             return const Text("Sedang mendapatkan data...");
                           }
@@ -57,12 +56,12 @@ class RiwayatPage extends StatelessWidget {
                     const SizedBox(height: 48),
                     const Text(
                       "Pesan Motivasi",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
                     const SizedBox(height: 10),
                     Expanded(
                       child: GridView.builder(
-                        itemCount: 5,
+                        itemCount: 6,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -81,12 +80,40 @@ class RiwayatPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(Color(0xffD4D6FF))),
-                      child: const Text("Tambah Pesan"),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 21),
+                      child: TextButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                scrollable: true,
+                                title: Text('Pesan Motivasi'),
+                                content: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Form(
+                                    child: Column(
+                                      children: <Widget>[
+                                        TextFormField(
+                                          decoration: InputDecoration(
+                                            labelText: 'Pesan',
+                                            icon: Icon(Icons.message),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                          );
+                        },
+                        style: const ButtonStyle(
+                        backgroundColor:
+                              MaterialStatePropertyAll(Colors.blue,)),
+                        child: const Text("Tambah Pesan", style: TextStyle(color: Colors.white)),
+                      ),
                     ),
                   ],
                 ),

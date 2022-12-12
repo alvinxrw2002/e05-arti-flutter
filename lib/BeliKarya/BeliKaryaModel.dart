@@ -3,15 +3,16 @@ import "dart:convert";
 import 'package:flutter/foundation.dart';
 
 class BeliKarya {
-  BeliKarya(
-      {required this.id,
-      required this.judul,
-      required this.kategori,
-      required this.deskripsi,
-      required this.user,
-      required this.harga,
-      required this.tanggal,
-      required this.sudah_dibeli});
+  BeliKarya({
+    required this.id,
+    required this.judul,
+    required this.kategori,
+    required this.deskripsi,
+    required this.user,
+    required this.harga,
+    required this.tanggal,
+    required this.sudah_dibeli,
+  });
 
   final int id;
   final String judul;
