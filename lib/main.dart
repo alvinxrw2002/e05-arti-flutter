@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
                 alignment: Alignment.centerLeft,
               ),
             )),
-        home: const LoginPage(),
+        home: const MyHomePage(title: "Arti"),
       ),
     );
   }
