@@ -55,7 +55,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                               snapshot.hasData) {
                             return Text('Rp. ${snapshot.data!}',
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 30));
+                                    fontWeight: FontWeight.bold, fontSize: 20));
                           } else {
                             return const Text("Sedang mendapatkan data...");
                           }
@@ -92,6 +92,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                                     return Container(
                                       height: 100,
                                       width: 100,
+                                      padding: const EdgeInsets.all(16),
                                       decoration: const BoxDecoration(
                                           color: Color(0xffD4D6FF),
                                           borderRadius: BorderRadius.all(
@@ -99,7 +100,17 @@ class _RiwayatPageState extends State<RiwayatPage> {
                                       child: Column(
                                         children: [
                                           Text(snapshot.data![index].isi),
-                                          Text(snapshot.data![index].nama),
+                                          const Spacer(),
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: Text(
+                                              '-${snapshot.data![index].nama}',
+                                              textAlign: TextAlign.end,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 4),
                                         ],
                                       ),
                                     );
@@ -119,56 +130,62 @@ class _RiwayatPageState extends State<RiwayatPage> {
                         );
                       },
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 21),
-                      child: TextButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  scrollable: true,
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Provider.of<PesanProvider>(context,
-                                                listen: false)
-                                            .addPesan(context, isi!);
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text("Kirim Pesan"),
-                                    ),
-                                  ],
-                                  title: Text('Pesan Motivasi'),
-                                  content: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Form(
-                                      child: Column(
-                                        children: <Widget>[
-                                          TextFormField(
-                                            decoration: const InputDecoration(
-                                              labelText: 'Pesan',
-                                              icon: Icon(Icons.message),
-                                            ),
-                                            onChanged: (value) {
-                                              isi = value;
-                                            },
+                    const SizedBox(height: 12),
+                    TextButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                scrollable: true,
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Provider.of<PesanProvider>(context,
+                                              listen: false)
+                                          .addPesan(context, isi!);
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text("Kirim Pesan"),
+                                  ),
+                                ],
+                                title: Text('Pesan Motivasi'),
+                                content: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Form(
+                                    child: Column(
+                                      children: <Widget>[
+                                        TextFormField(
+                                          decoration: const InputDecoration(
+                                            labelText: 'Pesan',
+                                            icon: Icon(Icons.message),
                                           ),
-                                        ],
-                                      ),
+                                          onChanged: (value) {
+                                            isi = value;
+                                          },
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                );
-                              });
-                        },
-                        style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
-                          Colors.blue,
-                        )),
-                        child: const Text("Tambah Pesan",
-                            style: TextStyle(color: Colors.white)),
-                      ),
+                                ),
+                              );
+                            });
+                      },
+                      style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Color(0xffD4D6FF),
+                          ),
+                          minimumSize: MaterialStatePropertyAll(
+                            Size(double.infinity, 44),
+                          ),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(25))
+                            ),
+                          )),
+                      child: const Center(child: Text("Tambah Pesan")),
                     ),
+                    const SizedBox(height: 12),
                   ],
                 ),
               ),
