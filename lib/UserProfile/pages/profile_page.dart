@@ -35,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
       var hasilResponse = await request
           .get("https://arti-pbp-e05.up.railway.app/profileuser/profile-json");
 
-      print(hasilResponse);
+      // print(hasilResponse);
 
       final listHasilData = hasilResponse as List<dynamic>;
       int panjangData = listHasilData.length;
