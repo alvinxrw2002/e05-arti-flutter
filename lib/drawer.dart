@@ -1,3 +1,4 @@
+import 'package:e05_arti_flutter/galeri/galeri_page.dart';
 import 'package:flutter/material.dart';
 import 'package:e05_arti_flutter/main.dart';
 import 'package:e05_arti_flutter/UserProfile/pages/profile_page.dart';
@@ -35,6 +36,13 @@ class NavigationDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => const UploadKarya()));
+            },
+          ),
+          ListTile(
+            title: const Text('Lihat Galeri'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const GaleriPage()));
             },
           ),
           ListTile(

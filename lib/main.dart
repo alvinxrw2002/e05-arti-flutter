@@ -1,3 +1,4 @@
+import 'package:e05_arti_flutter/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:e05_arti_flutter/drawer.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
                 alignment: Alignment.centerLeft,
               ),
             )),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: const LoginPage(),
       ),
     );
   }
