@@ -1,47 +1,38 @@
-class User {
-  String image;
-  String name;
-  String email;
-  String phone;
-  String aboutMeDescription;
+// To parse this JSON data, do
+//
+//     final dataJson = dataJsonFromJson(jsonString);
 
-  // Constructor
-  User({
-    required this.image,
-    required this.name,
-    required this.email,
-    required this.phone,
-    required this.aboutMeDescription,
-  });
+import 'dart:convert';
 
-  User copy({
-    String? imagePath,
-    String? name,
-    String? phone,
-    String? email,
-    String? about,
-  }) =>
-      User(
-        image: imagePath ?? this.image,
-        name: name ?? this.name,
-        email: email ?? this.email,
-        phone: phone ?? this.phone,
-        aboutMeDescription: about ?? this.aboutMeDescription,
-      );
+List<DataJson> dataJsonFromJson(String str) => List<DataJson>.from(json.decode(str).map((x) => DataJson.fromJson(x)));
 
-  static User fromJson(Map<String, dynamic> json) => User(
-        image: json['imagePath'],
-        name: json['name'],
-        email: json['email'],
-        aboutMeDescription: json['about'],
-        phone: json['phone'],
-      );
+String dataJsonToJson(List<DataJson> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-  Map<String, dynamic> toJson() => {
-        'imagePath': image,
-        'name': name,
-        'email': email,
-        'about': aboutMeDescription,
-        'phone': phone,
-      };
+class DataJson {
+    DataJson({
+        required this.username,
+        required this.email,
+        required this.phone,
+        required this.address,
+    });
+
+    String username;
+    String email;
+    String phone;
+    String address;
+
+    static DataJson fromJson(Map<String, dynamic> json) => DataJson(
+        username: json["username"],
+        email: json["email"],
+        phone: json["phone"],
+        address: json["address"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "username": username,
+        "email": email,
+        "phone": phone,
+        "address": address,
+    };
+
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:e05_arti_flutter/UserProfile/user/userdatas.dart';
 
 class UserData {
   static late SharedPreferences _preferences;
@@ -12,9 +13,9 @@ class UserData {
         "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
     name: 'Zayn Malaka',
     email: 'test.test@gmail.com',
-    phone: '(+62) 815-5039-7896',
-    aboutMeDescription:
-        'I am ZMD Entertainment Founder',
+    phone: '081550397896',
+    address:
+        'Jl. Bangka IX',
   );
 
   static Future init() async =>
