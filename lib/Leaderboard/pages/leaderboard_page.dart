@@ -71,7 +71,7 @@ class _LeaderboardState extends State<LeaderboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.read<CookieRequest>();
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(title: const Text('Leaderboard')),
       drawer: const NavigationDrawer(),
@@ -162,6 +162,14 @@ class _LeaderboardState extends State<LeaderboardPage> {
                                   listGambar = snapshot.data;
                                   return Column(
                                     children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 8),
+                                        child: Text(
+                                            listGambar![indexGambar].judul,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold)),
+                                      ),
                                       SizedBox(
                                         width: 300,
                                         child: Image.network(
@@ -179,6 +187,8 @@ class _LeaderboardState extends State<LeaderboardPage> {
                                           },
                                         ),
                                       ),
+                                      Text(
+                                          "Harga: Rp${listGambar![indexGambar].harga}"),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -212,7 +222,7 @@ class _LeaderboardState extends State<LeaderboardPage> {
                                             },
                                           ),
                                         ],
-                                      )
+                                      ),
                                     ],
                                   );
                                 }
