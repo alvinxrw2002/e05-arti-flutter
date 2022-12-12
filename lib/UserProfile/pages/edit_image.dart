@@ -63,7 +63,10 @@ class _EditImagePageState extends State<EditImagePage> {
                     width: 330,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        user.image = user.image;
+                        Navigator.pop(context);
+                      },
                       child: const Text(
                         'Update',
                         style: TextStyle(fontSize: 15),
