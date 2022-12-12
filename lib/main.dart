@@ -1,4 +1,3 @@
-import 'package:e05_arti_flutter/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:e05_arti_flutter/drawer.dart';
 import 'package:provider/provider.dart';
@@ -68,6 +67,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -86,10 +86,34 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.blueAccent,
           ),
           child: Center(
-              child: Text(
-            "Arti",
-            style: TextStyle(fontSize: 50),
-          )),
+            child: Container(
+                height: 500,
+                child: Column(
+                  children: [
+                    Text(
+                      "Arti",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                    (() {
+                      if (request.loggedIn) {
+                        return TextButton(
+                          child: Text("Logout"),
+                          onPressed: () async {
+                            await request.get(
+                                "https://arti-pbp-e05.up.railway.app/ajax-logout");
+                            if (!mounted) return;
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MyApp()));
+                          },
+                        );
+                      }
+                      return Text("");
+                    }()),
+                  ],
+                )),
+          ),
         ));
   }
 }
