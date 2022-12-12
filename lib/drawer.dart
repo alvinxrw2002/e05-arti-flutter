@@ -42,8 +42,10 @@ class NavigationDrawer extends StatelessWidget {
           ListTile(
             title: const Text('HomePage'),
             onTap: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const MyApp()));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MyHomePage(title: "Arti")));
             },
           ),
           ListTile(

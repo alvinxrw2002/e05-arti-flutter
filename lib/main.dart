@@ -110,13 +110,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         return TextButton(
                           child: Text("Logout"),
                           onPressed: () async {
-                            await request.get(
+                            await request.logout(
                                 "https://arti-pbp-e05.up.railway.app/ajax-logout");
                             if (!mounted) return;
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MyApp()));
+                                    builder: (context) =>
+                                        const MyHomePage(title: "Arti")));
                           },
                         );
                       }
