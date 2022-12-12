@@ -10,7 +10,7 @@ class UserData {
 
   static User myUser = User(
     image:
-        "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
+        "https://media.discordapp.net/attachments/993896108587745360/1051897283144323122/profiledefault.jpg?width=881&height=661",
     name: 'Zayn Malaka',
     email: 'test.test@gmail.com',
     phone: '081550397896',
