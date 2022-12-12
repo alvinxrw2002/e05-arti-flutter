@@ -1,3 +1,4 @@
+import 'package:e05_arti_flutter/Riwayat/pesan_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:e05_arti_flutter/drawer.dart';
 import 'package:provider/provider.dart';
@@ -13,11 +14,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (_) {
-        CookieRequest request = CookieRequest();
-        return request;
-      },
+    return MultiProvider(
+      providers: [
+        Provider<CookieRequest>(
+          create: (_) {
+            CookieRequest request = CookieRequest();
+            return request;
+          },
+        ),
+        ChangeNotifierProvider<PesanProvider>(
+          create: (_) {
+            PesanProvider pesanProvider = PesanProvider();
+            return pesanProvider;
+          },
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
