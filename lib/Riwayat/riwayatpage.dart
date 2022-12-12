@@ -111,4 +111,3 @@ class RiwayatPage extends StatelessWidget {
     return totalDonasi.toString();
   }
 }
-
