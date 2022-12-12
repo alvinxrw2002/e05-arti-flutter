@@ -1,4 +1,3 @@
-import 'dart:js';
 import 'package:e05_arti_flutter/login_page.dart' as login;
 
 import 'package:e05_arti_flutter/BeliKarya/BeliKarya.dart';
