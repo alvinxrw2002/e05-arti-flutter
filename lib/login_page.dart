@@ -7,6 +7,8 @@ import "package:flutter/material.dart";
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
+String username_loggedin = "";
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -103,6 +105,7 @@ class _LoginPageState extends State<LoginPage> {
             const AlertDialog(title: Text("Akun belum terdaftar")),
       );
     } else {
+      username_loggedin = username;
       log("Login berhasil");
       Navigator.pushReplacement(
           context,
