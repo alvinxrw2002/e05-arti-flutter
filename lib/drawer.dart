@@ -8,6 +8,7 @@ import 'package:e05_arti_flutter/Riwayat/riwayatpage.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:e05_arti_flutter/login_page.dart';
+import 'package:e05_arti_flutter/register_page.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -26,6 +27,15 @@ class NavigationDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => const LoginPage()));
+            },
+          ),
+          ListTile(
+            title: const Text('Register'),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegisterPage()));
             },
           ),
           ListTile(
