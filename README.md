@@ -51,3 +51,9 @@
 * Memasukkan seluruh data tersebut ke dalam struktur data list
 * Mengkonversikan data tersebut menjadi objek Future
 * Tampilkan seluruh data dengan menggunakan widget FutureBuilder
+
+## Badge
+[![Build status](https://build.appcenter.ms/v0.1/apps/686a42bf-e6bd-488c-b18f-3df9ed0f0183/branches/main/badge)](https://appcenter.ms)
+
+## Link aplikasi
+install.appcenter.ms/orgs/e05-pbp-2022/apps/arti/distribution_groups/public
